@@ -2,3 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+.Banner{
+    background: url('./bgimage.jpg');
+    height: 60vh;
+    width: 100%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 5px;
+}
+
+#bannerContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: -14%;
+
+}
