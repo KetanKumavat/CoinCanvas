@@ -1,19 +1,21 @@
 import React from 'react'
 import { makeStyles, Container} from '@mui/material'
-
+import Carousel from './Carousel';
 const Banner = () => {
   return (
     <div className='Banner'>
-        <Container className=''>
+        <Container>
           <div>
-            <h1 className='font-bold text-8xl flex flex-col justify-around' id='bannerContent'>
+            <h1 className='font-extrabold mt-[10vh] text-8xl flex flex-col justify-center' id='bannerContent'>
               CoinCanvas
             </h1>
-            <p className='text-white text-xl text-center pt-2'>
+            <p className='text-black text-2xl font-bold text-center pt-2'>
               Everything About Crypto
             </p>
           </div>
-          <div className='flex h-40 flex-col justify-center text-center'></div>
+      
+          <Carousel/>
+          {/* <Sample/> */}
         </Container>
       
     </div>
