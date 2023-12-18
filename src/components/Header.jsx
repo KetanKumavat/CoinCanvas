@@ -14,13 +14,13 @@ const Header = () => {
     <div className="w-full sticky">
       <div className="navbar w-1/2 md:ml-[50vh] bg-black border-slate-950 border rounded-full border-3 flex justify-between items-center p-5 mt-4 cursor-pointer">
         <div onClick={handleClick}>
-          <a className="btn ml-3 mb-2 btn-ghost text-5xl text-white :hover rounded-full :hover btn-wide">
+          <a className="btn mb-2 btn-ghost text-4xl">
             CoinCanvas
           </a>
         </div>
         <div className="flex items-center">
           <select
-            className="select select-bordered text-white rounded-full text-xl"
+            className="select select-bordered text-white border-white rounded-xl text-xl"
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}>
             <option disabled selected className="text-white">

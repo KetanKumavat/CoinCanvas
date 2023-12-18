@@ -5,9 +5,15 @@ import cryptoDataINR from "../../../data/cryptoDataINR.json";
 import cryptoDataUSD from "../../../data/cryptoDataUSD.json";
 import { CryptoState } from "../../CryptoContext";
 
+  export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
-  const { currency, setCurrency } = CryptoState();
+  const { currency, symbol } = CryptoState();
+
 
   useEffect(() => {
     // Use either cryptoDataINR or cryptoDataUSD based on your currency context
@@ -22,7 +28,7 @@ const Carousel = () => {
   }, [currency]);
 
   const items = trending.map((crypto) => (
-    <Link key={crypto.id} className="" to={`/cryptos/${crypto.id}`}>
+    <Link key={crypto.id} className="text-xl text-black">
       <div
         style={{
           display: "flex",
@@ -35,14 +41,17 @@ const Carousel = () => {
           className="h-28 object-cover mt-8"
           style={{ marginBottom: 10 }}
         />
-        <span>{crypto.name}</span>
+        <span className="font-medium">{crypto.name}</span>
         <span
           className={` ${
             crypto.price_change_percentage_24h < 0
-              ? "text-red-700 text-2xl"
-              : "text-green-800 text-2xl"
+              ? "text-red-700 text-xl font-semibold"
+              : "text-green-800 text-xl"
           }`}>
-          {crypto.current_price}
+          {crypto.price_change_percentage_24h.toFixed(2)}%{" "}
+        </span>
+        <span className="font-bold">
+          {symbol} {numberWithCommas(crypto.current_price)}
         </span>
       </div>
     </Link>
