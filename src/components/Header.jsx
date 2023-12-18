@@ -11,8 +11,8 @@ const Header = () => {
   const { currency, setCurrency } = CryptoState();
 
   return (
-    <div className="w-full sticky">
-      <div className="navbar w-1/2 md:ml-[50vh] bg-black border-slate-950 border rounded-full border-3 flex justify-between items-center p-5 mt-4 cursor-pointer">
+    <div className="ml-[50vh]">
+      <div className="navbar w-[100vh] bg-black border-slate-950 border rounded-full border-3 flex justify-between items-center p-5 mt-4 cursor-pointer">
         <div onClick={handleClick}>
           <a className="btn mb-2 btn-ghost text-4xl">
             CoinCanvas
@@ -20,7 +20,7 @@ const Header = () => {
         </div>
         <div className="flex items-center">
           <select
-            className="select select-bordered text-white border-white rounded-xl text-xl"
+            className="select select-bordered text-white border-white border-2 rounded-xl text-xl"
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}>
             <option disabled selected className="text-white">
