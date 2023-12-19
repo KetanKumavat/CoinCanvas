@@ -45,7 +45,7 @@ const Carousel = () => {
         <span
           className={` ${
             crypto.price_change_percentage_24h < 0
-              ? "text-red-700 text-xl font-semibold"
+              ? "text-red-600 text-xl font-bold"
               : "text-green-800 text-xl"
           }`}>
           {crypto.price_change_percentage_24h.toFixed(2)}%{" "}

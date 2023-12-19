@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    background: rgb(230, 236, 237);
+    background: #e6eced;
     overflow-x: hidden;
 }
 

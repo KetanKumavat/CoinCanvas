@@ -11,7 +11,7 @@ const Header = () => {
   const { currency, setCurrency } = CryptoState();
 
   return (
-    <div className="ml-[50vh]">
+    <div className="flex cursor-default justify-center w-full sm:justify-center">
       <div className="navbar w-[100vh] bg-black border-slate-950 border rounded-full border-3 flex justify-between items-center p-5 mt-4 cursor-pointer">
         <div onClick={handleClick}>
           <a className="btn mb-2 btn-ghost text-4xl">
