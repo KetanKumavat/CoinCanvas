@@ -16,6 +16,9 @@ import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
 
 export function numberWithCommas(x) {
+  if (x === undefined || x === null) {
+    return ""; // or any other default value you want
+  }
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -36,6 +39,9 @@ const CoinsTable = () => {
       coinList = coinListUSD;
     }
     setCoins(coinList);
+
+    // const { data } = await axios.get(CoinList(currency)); FOR API CALL
+    
     setLoading(false);
   };
 
@@ -122,7 +128,7 @@ const CoinsTable = () => {
                             align="right"
                             className="text-5xl font-semibold">
                             <span className="text-3xl">
-                              {symbol} {numberWithCommas(row.current_price)}
+                              {symbol} {numberWithCommas(row.current_price ??0)}
                             </span>
                           </TableCell>
                           <TableCell
@@ -139,7 +145,7 @@ const CoinsTable = () => {
                           <TableCell align="right">
                             <span className="text-3xl">
                               {symbol}{" "}
-                              {numberWithCommas(row.market_cap).slice(0, -6)}
+                              {numberWithCommas(row.market_cap ?? 0).slice(0, -6)}
                               <span className="ml-1">M</span>
                             </span>
                           </TableCell>
