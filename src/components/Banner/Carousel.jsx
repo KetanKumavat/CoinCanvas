@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AliceCarousel from "react-alice-carousel";
 import cryptoDataINR from "../../../data/cryptoDataINR.json";
 import cryptoDataUSD from "../../../data/cryptoDataUSD.json";
@@ -14,6 +14,7 @@ const Carousel = () => {
   const [trending, setTrending] = useState([]);
   const { currency, symbol } = CryptoState();
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Use either cryptoDataINR or cryptoDataUSD based on your currency context
@@ -40,6 +41,9 @@ const Carousel = () => {
           alt={crypto.name}
           className="h-28 object-cover mt-8"
           style={{ marginBottom: 10 }}
+          onClick={() => {
+            navigate(`/coins/${crypto.id}`);
+          }}
         />
         <span className="font-medium">{crypto.name}</span>
         <span

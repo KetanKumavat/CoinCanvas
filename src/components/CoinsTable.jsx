@@ -43,7 +43,7 @@ const CoinsTable = () => {
     fetchCoins();
   }, [currency]);
 
-    const handleSearch = () => {
+  const handleSearch = () => {
     return coins.filter(
       (coin) =>
         coin.name.toLowerCase().includes(search) ||
@@ -89,64 +89,85 @@ const CoinsTable = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
                   {handleSearch()
-                  .slice((page - 1) * 10, (page - 1) * 10 + 10)
-                  .map((row) => {
-                    const profit = row.price_change_percentage_24h > 0;
-                    return (
-                      <TableRow
-                        onClick={() => navigate.push(`/coins/${row.id}`)}
-                        className="cursor-pointer bg-[#e6eced] hover:bg-gray-300"
-                        key={row.name}>
-                        <div className="flex flex-row items-center justify-center">
-                          <TableCell component="th" scope="row">
-                            <img
-                              src={row?.image}
-                              alt={row.name}
-                              className="h-24 mb-2"
-                            />
-                            <div className="flex flex-col justify-center items-center">
-                              <span className="uppercase text-3xl">
-                                {row.symbol}
-                              </span>
-                              <span className="text-slate-950">{row.name}</span>
-                            </div>
+                    .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                    .map((row) => {
+                      const profit = row.price_change_percentage_24h > 0;
+                      return (
+                        <TableRow
+                          className="cursor-pointer bg-[#e6eced] hover:bg-gray-300"
+                          onClick={() => {
+                            navigate(`/coins/${row.id}`);
+                            console.log(row.id);
+                          }}
+                          key={row.name}>
+                          <div className="flex flex-row items-center justify-center">
+                            <TableCell component="th" scope="row">
+                              <img
+                                src={row?.image}
+                                alt={row.name}
+                                className="h-24 mb-2 cursor-pointer"
+                              />
+                              <div className="flex flex-col justify-center items-center">
+                                <span className="uppercase text-3xl">
+                                  {row.symbol}
+                                </span>
+                                <span className="text-slate-950">
+                                  {row.name}
+                                </span>
+                              </div>
+                            </TableCell>
+                          </div>
+                          <TableCell
+                            align="right"
+                            className="text-5xl font-semibold">
+                            <span className="text-3xl">
+                              {symbol} {numberWithCommas(row.current_price)}
+                            </span>
                           </TableCell>
-                        </div>
-                        <TableCell
-                          align="right"
-                          className="text-5xl font-semibold">
-                          <span className="text-3xl">
-                            {symbol} {numberWithCommas(row.current_price)}
-                          </span>
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                          style={{
-                            fontSize: "1.875rem",
-                            lineHeight: "2.25rem",
-                            color: profit ? "green" : "red",
-                            fontWeight: 500,
-                          }}>
-                          {profit && "+"}
-                          {row.price_change_percentage_24h.toFixed(2)}%
-                        </TableCell>
-                        <TableCell align="right">
-                          <span className="text-3xl">
-                            {symbol}{" "}
-                            {numberWithCommas(row.market_cap).slice(0, -6)}
-                            <span className="ml-1">M</span>
-                          </span>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
+                          <TableCell
+                            align="right"
+                            style={{
+                              fontSize: "1.875rem",
+                              lineHeight: "2.25rem",
+                              color: profit ? "green" : "red",
+                              fontWeight: 500,
+                            }}>
+                            {profit && "+"}
+                            {row.price_change_percentage_24h.toFixed(2)}%
+                          </TableCell>
+                          <TableCell align="right">
+                            <span className="text-3xl">
+                              {symbol}{" "}
+                              {numberWithCommas(row.market_cap).slice(0, -6)}
+                              <span className="ml-1">M</span>
+                            </span>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                 </TableBody>
               </Table>
             </div>
           )}
         </TableContainer>
+        <div className="flex justify-center items-center mt-8 mb-5">
+          <button
+            className="bg-black text-white p-3 rounded-xl font-semibold"
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}>
+            Previous Page
+          </button>
+          <span className="text-2xl flex ml-4 font-bold">
+           {page}
+          </span>
+          <button
+            className="bg-black text-white p-3 rounded-xl ml-4 font-semibold"
+            onClick={() => setPage(page + 1)}
+            disabled={page === 10}>
+            Next Page
+          </button>
+        </div>
       </div>
     </div>
   );
