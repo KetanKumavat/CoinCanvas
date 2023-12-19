@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+data/cryptoDataUSD.json
+data/coinListINR.json
+data/coinListUSD.json
+data/cryptoDataINR.json
