@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AliceCarousel from "react-alice-carousel";
-import cryptoDataINR from "../../../data/cryptoDataINR.json";
-import cryptoDataUSD from "../../../data/cryptoDataUSD.json";
+import cryptoDataINR from "../../data/cryptoDataINR.json";
+import cryptoDataUSD from "../../data/cryptoDataUSD.json"
 import { CryptoState } from "../../CryptoContext";
 
   export function numberWithCommas(x) {
