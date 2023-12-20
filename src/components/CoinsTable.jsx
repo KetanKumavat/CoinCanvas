@@ -30,21 +30,25 @@ const CoinsTable = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
+  // const fetchCoins = async () => {
+  //   setLoading(true);
+  //   let coinList;
+  //   if (currency === "INR") {
+  //     coinList = coinListINR;
+  //   } else if (currency === "USD") {
+  //     coinList = coinListUSD;
+  //   }
+  //   setCoins(coinList);
   const fetchCoins = async () => {
     setLoading(true);
-    let coinList;
-    if (currency === "INR") {
-      coinList = coinListINR;
-    } else if (currency === "USD") {
-      coinList = coinListUSD;
-    }
-    setCoins(coinList);
-
-    // const { data } = await axios.get(CoinList(currency)); FOR API CALL
-    
+    const { data } = await axios.get(CoinList(currency));
+    console.log(data);
+    setCoins(data);
     setLoading(false);
   };
 
+  // const { data } = await axios.get(CoinList(currency)); //FOR API CALL
+  // console.log(data);
   useEffect(() => {
     fetchCoins();
   }, [currency]);
@@ -128,7 +132,8 @@ const CoinsTable = () => {
                             align="right"
                             className="text-5xl font-semibold">
                             <span className="text-3xl">
-                              {symbol} {numberWithCommas(row.current_price ??0)}
+                              {symbol}{" "}
+                              {numberWithCommas(row.current_price ?? 0)}
                             </span>
                           </TableCell>
                           <TableCell
@@ -145,7 +150,10 @@ const CoinsTable = () => {
                           <TableCell align="right">
                             <span className="text-3xl">
                               {symbol}{" "}
-                              {numberWithCommas(row.market_cap ?? 0).slice(0, -6)}
+                              {numberWithCommas(row.market_cap ?? 0).slice(
+                                0,
+                                -6
+                              )}
                               <span className="ml-1">M</span>
                             </span>
                           </TableCell>
@@ -164,9 +172,7 @@ const CoinsTable = () => {
             disabled={page === 1}>
             Previous Page
           </button>
-          <span className="text-2xl flex ml-4 font-bold">
-           {page}
-          </span>
+          <span className="text-2xl flex ml-4 font-bold">{page}</span>
           <button
             className="bg-black text-white p-3 rounded-xl ml-4 font-semibold"
             onClick={() => setPage(page + 1)}
