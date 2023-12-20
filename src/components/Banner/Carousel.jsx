@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AliceCarousel from "react-alice-carousel";
-import cryptoDataINR from "../../data/cryptoDataINR.json";
-import cryptoDataUSD from "../../data/cryptoDataUSD.json"
+// import coinDataINR from "../../../data/coinDataINR.json";
+// import coinDataUSD from "../../../data/coinDataUSD.json";
 import { CryptoState } from "../../CryptoContext";
-
-  export function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
+import axios from "axios";
+import { TrendingCoins } from "../../config/api";
+import { numberWithCommas } from "../CoinsTable";
 
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
@@ -16,23 +14,31 @@ const Carousel = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Use either cryptoDataINR or cryptoDataUSD based on your currency context
-    const selectedData = currency === "INR" ? cryptoDataINR : cryptoDataUSD;
-    setTrending(selectedData.slice(0, 8)); // Display the first 5 trending coins
-  }, [currency]);
+  // useEffect(() => {
+  //   // Use either coinDataINR or coinDataUSD based on your currency context
+  //   const selectedData = currency === "INR" ? coinDataINR : coinDataUSD;
+  //   setTrending(selectedData.slice(0, 8)); // Display the first 5 trending coins
+  // }, [currency]);
 
-  useEffect(() => {
-    console.log("Currency changed:", currency);
-    const selectedData = currency === "INR" ? cryptoDataINR : cryptoDataUSD;
-    setTrending(selectedData.slice(0, 8));
-  }, [currency]);
+  // useEffect(() => {
+  //   console.log("Currency changed:", currency);
+  //   const selectedData = currency === "INR" ? coinDataINR : coinDataUSD;
+  //   setTrending(selectedData.slice(0, 8));
+  // }, [currency]);
 
-  const items = trending.map((crypto) => (
-    <Link
-      to={`/coins/${crypto.id}`}
-      key={crypto.id}
-      className="text-xl text-black">
+    const fetchTrendingCoins = async () => {
+      const { data } = await axios.get(TrendingCoins(currency));
+      console.log(data);
+      setTrending(data);
+    };
+      useEffect(() => {
+        fetchTrendingCoins();
+      }, [currency]);
+
+  const items = trending.map((coin) => {
+    let profit = coin?.price_change_percentage_24h >= 0;
+    return (
+    <Link key={coin.id} className="text-xl text-black">
       <div
         style={{
           display: "flex",
@@ -40,26 +46,32 @@ const Carousel = () => {
           alignItems: "center",
         }}>
         <img
-          src={crypto.image}
-          alt={crypto.name}
+          src={coin.image}
+          alt={coin.name}
           className="h-28 object-cover mt-8"
           style={{ marginBottom: 10 }}
+          onClick={() => {
+            navigate(`/coins/${coin.id}`);
+          }}
         />
-        <span className="font-medium">{crypto.name}</span>
+        <span className="font-medium">{coin.name}</span>
         <span
-          className={` ${
-            crypto.price_change_percentage_24h < 0
-              ? "text-red-600 text-xl font-bold"
-              : "text-green-800 text-xl"
-          }`}>
-          {crypto.price_change_percentage_24h.toFixed(2)}%{" "}
-        </span>
+            style={{
+              color: profit > 0 ? "rgb(14, 203, 129)" : "red",
+              fontWeight: 500,
+            }}
+          >
+            {profit && "+"}
+            {coin?.price_change_percentage_24h?.toFixed(2)}%
+          </span>
         <span className="font-bold">
-          {symbol} {numberWithCommas(crypto.current_price)}
+          {symbol} {numberWithCommas(coin.current_price)}
         </span>
       </div>
     </Link>
-  ));
+
+  );
+  });
 
   const responsive = {
     0: {
