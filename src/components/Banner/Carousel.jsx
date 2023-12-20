@@ -28,7 +28,7 @@ const Carousel = () => {
 
     const fetchTrendingCoins = async () => {
       const { data } = await axios.get(TrendingCoins(currency));
-      console.log(data);
+      // console.log(data);
       setTrending(data);
     };
       useEffect(() => {
@@ -38,39 +38,37 @@ const Carousel = () => {
   const items = trending.map((coin) => {
     let profit = coin?.price_change_percentage_24h >= 0;
     return (
-    <Link key={coin.id} className="text-xl text-black">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}>
-        <img
-          src={coin.image}
-          alt={coin.name}
-          className="h-28 object-cover mt-8"
-          style={{ marginBottom: 10 }}
-          onClick={() => {
-            navigate(`/coins/${coin.id}`);
-          }}
-        />
-        <span className="font-medium">{coin.name}</span>
-        <span
+      <Link
+        key={coin.id}
+        to={`/coins/${coin.id}`}
+        className="text-xl text-black">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+          <img
+            src={coin.image}
+            alt={coin.name}
+            className="h-28 object-cover mt-8"
+            style={{ marginBottom: 10 }}
+          />
+          <span className="font-medium">{coin.name}</span>
+          <span
             style={{
               color: profit > 0 ? "rgb(14, 203, 129)" : "red",
               fontWeight: 500,
-            }}
-          >
+            }}>
             {profit && "+"}
             {coin?.price_change_percentage_24h?.toFixed(2)}%
           </span>
-        <span className="font-bold">
-          {symbol} {numberWithCommas(coin.current_price)}
-        </span>
-      </div>
-    </Link>
-
-  );
+          <span className="font-bold">
+            {symbol} {numberWithCommas(coin.current_price)}
+          </span>
+        </div>
+      </Link>
+    );
   });
 
   const responsive = {

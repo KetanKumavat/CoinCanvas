@@ -42,7 +42,7 @@ const CoinsTable = () => {
   const fetchCoins = async () => {
     setLoading(true);
     const { data } = await axios.get(CoinList(currency));
-    console.log(data);
+    // console.log(data);
     setCoins(data);
     setLoading(false);
   };
@@ -108,7 +108,7 @@ const CoinsTable = () => {
                           className="cursor-pointer bg-[#e6eced] hover:bg-gray-300"
                           onClick={() => {
                             navigate(`/coins/${row.id}`);
-                            console.log(row.id);
+                            // console.log(row.id);
                           }}
                           key={row.name}>
                           <div className="flex flex-row items-center justify-center">
