@@ -10,8 +10,8 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
-import coinListINR from "../data/coinListINR.json";
-import coinListUSD from "../data/coinListUSD.json";
+// import coinListINR from "../data/coinListINR.json";
+// import coinListUSD from "../data/coinListUSD.json";
 import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
 
