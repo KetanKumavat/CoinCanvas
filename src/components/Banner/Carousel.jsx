@@ -29,7 +29,10 @@ const Carousel = () => {
   }, [currency]);
 
   const items = trending.map((crypto) => (
-    <Link key={crypto.id} className="text-xl text-black">
+    <Link
+      to={`/coins/${crypto.id}`}
+      key={crypto.id}
+      className="text-xl text-black">
       <div
         style={{
           display: "flex",
@@ -41,9 +44,6 @@ const Carousel = () => {
           alt={crypto.name}
           className="h-28 object-cover mt-8"
           style={{ marginBottom: 10 }}
-          onClick={() => {
-            navigate(`/coins/${crypto.id}`);
-          }}
         />
         <span className="font-medium">{crypto.name}</span>
         <span

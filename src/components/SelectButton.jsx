@@ -4,9 +4,9 @@ const SelectButton = ({ children, selected, onClick }) => {
   return (
     <span
       onClick={onClick}
-      className={`border-2 border-gold rounded-md p-2 md:p-4 font-montserrat cursor-pointer ${
-        selected ? "bg-gold text-black font-bold" : ""
-      } hover:bg-gold hover:text-black transition-colors duration-300`}>
+      className={`border-2 p-4 m-1 text-center font-semibold border-black rounded-md flex gap-4 md:p-2 font-montserrat cursor-pointer ${
+        selected ? "bg-black text-white font-bold" : ""
+      } hover:scale-75 transition-colors duration-1000`}>
       {children}
     </span>
   );
