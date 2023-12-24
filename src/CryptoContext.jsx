@@ -10,9 +10,11 @@ const [symbol,setSymbol] = useState('₹');
 useEffect(() => {
     if(currency === 'INR'){
         setSymbol('₹');
+        console.log('Currency changed:',currency);
     }
     else if (currency === 'USD'){
         setSymbol('$');
+        console.log("Currency changed:", currency);
     }
 },[currency])
 
