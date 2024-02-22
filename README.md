@@ -1,10 +1,10 @@
 # <p align="center">CoinCanvas</p>
 
-![image](https://github.com/KetanKumavat/CoinCanvas/assets/127680348/4fd722d7-2bf8-48b6-a660-f247355778d4)
 <br>
+<div align="center">
+<img src="https://github.com/KetanKumavat/CoinCanvas/assets/127680348/4fd722d7-2bf8-48b6-a660-f247355778d4" alt="image" width="60%" align="center" aspect="square">
+</div>
 <br>
-<br>
-![image](https://github.com/KetanKumavat/CoinCanvas/assets/127680348/0694998d-25bb-417f-8f3e-cc80a19238ed)
 <br>
 
 <div align="center">
